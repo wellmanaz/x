@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Games</title>
+<style>
+  :root {
+    --bg1: #0b1020;
+    --bg2: #1a1440;
+    --text: #f4f6ff;
+    --muted: #b7bdd8;
+    --ring: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: radial-gradient(ellipse at 20% 0%, #2a2070 0%, transparent 55%),
+                radial-gradient(ellipse at 90% 100%, #10345a 0%, transparent 50%),
+                linear-gradient(160deg, var(--bg1), var(--bg2));
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+    /* keep everything inside the TV's safe area */
+    padding: 5vh 5vw;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  header { margin-bottom: 3.5vh; }
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4.2vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  .hint {
+    margin: 0.6vh 0 0;
+    color: var(--muted);
+    font-size: clamp(1rem, 1.5vw, 1.6rem);
+  }
+  .hint b { color: var(--text); font-weight: 600; }
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3vw;
+    align-content: start;
+  }
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; gap: 4vh; }
+  }
+  .tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 58vh;
+    border-radius: 28px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.06);
+    border: 3px solid rgba(255, 255, 255, 0.12);
+    outline: none;
+    transform: scale(0.97);
+    transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
+  }
+  @media (max-width: 900px) { .tile { min-height: 0; } }
+  .tile:focus, .tile:focus-visible {
+    transform: scale(1.02);
+    border-color: var(--ring);
+    box-shadow: 0 0 0 6px var(--accent), 0 18px 60px rgba(0, 0, 0, 0.55);
+  }
+  .tile:focus .play { opacity: 1; transform: none; }
+  .art {
+    flex: 1 1 auto;
+    min-height: 22vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--art);
+  }
+  .art svg { width: 72%; max-height: 30vh; height: auto; }
+  .body { padding: 2.4vh 1.8vw 2.6vh; }
+  .name {
+    margin: 0;
+    font-size: clamp(1.8rem, 2.9vw, 3.4rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .desc {
+    margin: 1vh 0 0;
+    font-size: clamp(1.05rem, 1.45vw, 1.7rem);
+    line-height: 1.35;
+    color: var(--text);
+  }
+  .meta {
+    margin: 1.4vh 0 0;
+    font-size: clamp(0.95rem, 1.2vw, 1.4rem);
+    color: var(--muted);
+  }
+  .play {
+    position: absolute;
+    top: 2vh;
+    right: 1.4vw;
+    padding: 0.5vh 1vw;
+    border-radius: 999px;
+    background: var(--ring);
+    color: #111;
+    font-weight: 700;
+    font-size: clamp(0.95rem, 1.2vw, 1.4rem);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 140ms ease, transform 140ms ease;
+  }
+  .play .a {
+    display: inline-block;
+    width: 1.4em;
+    height: 1.4em;
+    line-height: 1.4em;
+    margin-right: 0.35em;
+    border-radius: 50%;
+    background: #3aa53a;
+    color: #fff;
+    text-align: center;
+  }
+  .tile.launching .play { opacity: 1; transform: none; }
+  .tile.launching .play-label::after { content: "ing…"; }
+
+  #tt { --accent: #f5a623; --art: linear-gradient(150deg, #5a3a0e, #c9781a 60%, #f5c04a); }
+  #hx { --accent: #3fd0e8; --art: linear-gradient(150deg, #0c1d3f, #2c2b7a 55%, #1d8fb0); }
+  #mt { --accent: #e8734a; --art: linear-gradient(180deg, #f2b56b 0%, #e0844f 55%, #9c4a2e 100%); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tile, .play { transition: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Pick a game</h1>
+  <p class="hint">Move with the <b>D-pad</b>, <b>stick</b> or pointer, then press <b>A</b> to play.</p>
+</header>
+
+<main id="tiles">
+  <a class="tile" id="tt" href="https://wellmanaz.github.io/tt/">
+    <span class="play"><span class="a">A</span><span class="play-label">Play</span></span>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 200 120">
+        <circle cx="34" cy="28" r="14" fill="#fff3c4" opacity="0.85"/>
+        <circle cx="29" cy="25" r="3" fill="#e7d79a"/>
+        <circle cx="39" cy="33" r="2.2" fill="#e7d79a"/>
+        <line x1="100" y1="34" x2="100" y2="20" stroke="#2b1a05" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="100" cy="17" r="6" fill="#ff5a3c"/>
+        <rect x="68" y="34" width="64" height="52" rx="13" fill="#e9eef7" stroke="#2b1a05" stroke-width="4"/>
+        <circle cx="87" cy="57" r="8" fill="#2b1a05"/>
+        <circle cx="113" cy="57" r="8" fill="#2b1a05"/>
+        <circle cx="89.5" cy="54.5" r="2.5" fill="#fff"/>
+        <circle cx="115.5" cy="54.5" r="2.5" fill="#fff"/>
+        <rect x="86" y="72" width="28" height="6" rx="3" fill="#2b1a05"/>
+        <rect x="80" y="86" width="40" height="14" rx="4" fill="#9aa6bb" stroke="#2b1a05" stroke-width="4"/>
+        <circle cx="156" cy="88" r="17" fill="#ffd84a" stroke="#7a4b00" stroke-width="4"/>
+        <text x="156" y="96" text-anchor="middle" font-size="22" font-weight="700" fill="#7a4b00" font-family="Segoe UI, sans-serif">$</text>
+      </svg>
+    </div>
+    <div class="body">
+      <h2 class="name">Tendie Town</h2>
+      <p class="desc">Claim land on the moon, build bots and out-trade the other apes.</p>
+      <p class="meta">1–4 players · Xbox controllers · AI fills empty seats</p>
+    </div>
+  </a>
+
+  <a class="tile" id="hx" href="https://wellmanaz.github.io/settlers/">
+    <span class="play"><span class="a">A</span><span class="play-label">Play</span></span>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 200 120">
+        <defs>
+          <polygon id="hex" points="0,-20 17.32,-10 17.32,10 0,20 -17.32,10 -17.32,-10"/>
+        </defs>
+        <circle cx="22" cy="20" r="1.6" fill="#fff"/>
+        <circle cx="180" cy="16" r="1.2" fill="#fff"/>
+        <circle cx="170" cy="104" r="1.6" fill="#fff"/>
+        <circle cx="26" cy="100" r="1.1" fill="#fff"/>
+        <g stroke="#0a1230" stroke-width="3">
+          <use href="#hex" x="100" y="60" fill="#c9d3e8"/>
+          <use href="#hex" x="138" y="60" fill="#7fd3ff"/>
+          <use href="#hex" x="62" y="60" fill="#5d6378"/>
+          <use href="#hex" x="119" y="27" fill="#b98cff"/>
+          <use href="#hex" x="81" y="27" fill="#6fcf7a"/>
+          <use href="#hex" x="119" y="93" fill="#8a8fa3"/>
+          <use href="#hex" x="81" y="93" fill="#7fd3ff"/>
+        </g>
+        <circle cx="100" cy="60" r="8" fill="#0a1230"/>
+        <text x="100" y="64.5" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="Segoe UI, sans-serif">8</text>
+      </svg>
+    </div>
+    <div class="body">
+      <h2 class="name">Hexfront</h2>
+      <p class="desc">Claim an asteroid belt, trade resources and race to 10 points.</p>
+      <p class="meta">2–4 players · phones are the controllers</p>
+    </div>
+  </a>
+
+  <a class="tile" id="mt" href="https://wellmanaz.github.io/Carscacone/">
+    <span class="play"><span class="a">A</span><span class="play-label">Play</span></span>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 200 120">
+        <circle cx="150" cy="36" r="17" fill="#fff1c7"/>
+        <polygon points="14,96 42,52 96,52 110,72 134,72 150,96" fill="#8e3f25"/>
+        <polygon points="42,52 96,52 92,60 46,60" fill="#b55a35"/>
+        <polygon points="120,96 150,64 172,64 192,96" fill="#a94d2d"/>
+        <rect x="0" y="96" width="200" height="24" fill="#d9925a"/>
+        <path d="M70 120 C 80 108, 108 104, 118 96" fill="none" stroke="#fff4dc" stroke-width="4" stroke-dasharray="8 6" stroke-linecap="round"/>
+        <g fill="#3f6b3a">
+          <rect x="26" y="78" width="5" height="20" rx="2.5"/>
+          <rect x="19" y="84" width="5" height="9" rx="2.5"/>
+          <rect x="33" y="82" width="5" height="8" rx="2.5"/>
+        </g>
+      </svg>
+    </div>
+    <div class="body">
+      <h2 class="name">Mesa Trails</h2>
+      <p class="desc">Lay desert tiles, place scouts and score trails, mesas and oases.</p>
+      <p class="meta">2–4 players · Xbox controllers · AI opponents</p>
+    </div>
+  </a>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var tiles = Array.prototype.slice.call(document.querySelectorAll(".tile"));
+  var STORE = "launcher:last";
+  var launching = false;
+
+  function current() {
+    var i = tiles.indexOf(document.activeElement);
+    return i < 0 ? null : tiles[i];
+  }
+
+  function focusTile(t) {
+    if (!t) return;
+    try { t.focus({ preventScroll: false }); } catch (e) { t.focus(); }
+  }
+
+  function remember(t) {
+    try { localStorage.setItem(STORE, t.id); } catch (e) { /* storage may be off */ }
+  }
+
+  function launch(t) {
+    if (!t || launching) return;
+    t.click();
+  }
+
+  // Move focus to the nearest tile in a direction, using where the tiles
+  // actually sit on screen, so it works for the row layout and the stacked one.
+  function move(dx, dy) {
+    var from = current();
+    if (!from) { focusTile(tiles[0]); return; }
+    var a = from.getBoundingClientRect();
+    var ax = a.left + a.width / 2, ay = a.top + a.height / 2;
+    var best = null, bestScore = Infinity;
+    tiles.forEach(function (t) {
+      if (t === from) return;
+      var b = t.getBoundingClientRect();
+      var vx = b.left + b.width / 2 - ax, vy = b.top + b.height / 2 - ay;
+      var along = vx * dx + vy * dy;
+      if (along <= 1) return;
+      var across = Math.abs(vx * dy - vy * dx);
+      var score = along + 2 * across;
+      if (score < bestScore) { bestScore = score; best = t; }
+    });
+    if (best) focusTile(best);
+  }
+
+  tiles.forEach(function (t) {
+    t.addEventListener("click", function () {
+      launching = true;
+      remember(t);
+      t.classList.add("launching");
+    });
+    // Keep the focus ring under the pointer, so pointer and D-pad agree.
+    t.addEventListener("mouseenter", function () { if (!launching) focusTile(t); });
+  });
+
+  var KEYS = {
+    ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1],
+    GamepadDPadLeft: [-1, 0], GamepadDPadRight: [1, 0], GamepadDPadUp: [0, -1], GamepadDPadDown: [0, 1],
+    GamepadLeftThumbstickLeft: [-1, 0], GamepadLeftThumbstickRight: [1, 0],
+    GamepadLeftThumbstickUp: [0, -1], GamepadLeftThumbstickDown: [0, 1]
+  };
+
+  document.addEventListener("keydown", function (e) {
+    var d = KEYS[e.key];
+    if (d) { e.preventDefault(); move(d[0], d[1]); return; }
+    if (e.key === "Enter" || e.key === " " || e.key === "GamepadA") {
+      var t = current() || tiles[0];
+      e.preventDefault();
+      launch(t);
+    }
+  });
+
+  // Gamepad API: D-pad or left stick moves, A plays. A button that is
+  // already held when a pad is first seen (say, the A that opened this
+  // page) has to be released before it counts.
+  var pads = {};
+  var FIRST_REPEAT = 420, NEXT_REPEAT = 180, DEAD = 0.5;
+
+  function padDir(gp) {
+    var b = gp.buttons, ax = gp.axes;
+    function on(i) { return !!(b[i] && b[i].pressed); }
+    if (on(14)) return [-1, 0];
+    if (on(15)) return [1, 0];
+    if (on(12)) return [0, -1];
+    if (on(13)) return [0, 1];
+    var x = ax[0] || 0, y = ax[1] || 0;
+    if (Math.abs(x) < DEAD && Math.abs(y) < DEAD) return null;
+    return Math.abs(x) >= Math.abs(y) ? [x < 0 ? -1 : 1, 0] : [0, y < 0 ? -1 : 1];
+  }
+
+  function aDown(gp) { return !!(gp.buttons[0] && gp.buttons[0].pressed); }
+
+  function resetPads() {
+    var list = navigator.getGamepads ? navigator.getGamepads() : [];
+    pads = {};
+    for (var i = 0; i < list.length; i++) {
+      var gp = list[i];
+      if (gp) pads[gp.index] = { a: aDown(gp), dir: padDir(gp) ? "held" : null, next: Infinity };
+    }
+  }
+
+  function poll() {
+    var list = navigator.getGamepads ? navigator.getGamepads() : [];
+    var now = performance.now();
+    for (var i = 0; i < list.length; i++) {
+      var gp = list[i];
+      if (!gp) continue;
+      var s = pads[gp.index];
+      if (!s) {
+        s = pads[gp.index] = { a: aDown(gp), dir: padDir(gp) ? "held" : null, next: Infinity };
+        continue;
+      }
+      var a = aDown(gp);
+      if (a && !s.a) launch(current() || tiles[0]);
+      s.a = a;
+
+      var d = padDir(gp);
+      var key = d ? d.join(",") : null;
+      if (!key) { s.dir = null; }
+      else if (s.dir === "held") { /* wait for release */ }
+      else if (key !== s.dir) { s.dir = key; s.next = now + FIRST_REPEAT; move(d[0], d[1]); }
+      else if (now >= s.next) { s.next = now + NEXT_REPEAT; move(d[0], d[1]); }
+    }
+    requestAnimationFrame(poll);
+  }
+
+  // Coming back with the browser's Back button can restore this page as it
+  // was; clear the "Playing…" state and ignore buttons still held.
+  window.addEventListener("pageshow", function () {
+    launching = false;
+    tiles.forEach(function (t) { t.classList.remove("launching"); });
+    resetPads();
+    if (!current()) start();
+  });
+
+  function start() {
+    var last = null;
+    try { last = document.getElementById(localStorage.getItem(STORE) || ""); } catch (e) { /* ignore */ }
+    focusTile(tiles.indexOf(last) >= 0 ? last : tiles[0]);
+  }
+
+  start();
+  resetPads();
+  requestAnimationFrame(poll);
+})();
+</script>
+</body>
+</html>
