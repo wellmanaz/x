@@ -44,11 +44,14 @@
   main {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3vw;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2vw;
     align-content: start;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 1000px) {
+    main { grid-template-columns: repeat(2, 1fr); gap: 3vh 3vw; }
+  }
+  @media (max-width: 640px) {
     main { grid-template-columns: 1fr; gap: 4vh; }
   }
   .tile {
@@ -66,7 +69,7 @@
     transform: scale(0.97);
     transition: transform 140ms ease, box-shadow 140ms ease, border-color 140ms ease;
   }
-  @media (max-width: 900px) { .tile { min-height: 0; } }
+  @media (max-width: 1000px) { .tile { min-height: 0; } }
   .tile:focus, .tile:focus-visible {
     transform: scale(1.02);
     border-color: var(--ring);
@@ -81,23 +84,23 @@
     justify-content: center;
     background: var(--art);
   }
-  .art svg { width: 72%; max-height: 30vh; height: auto; }
-  .body { padding: 2.4vh 1.8vw 2.6vh; }
+  .art svg { width: 78%; max-height: 30vh; height: auto; }
+  .body { padding: 2.2vh 1.4vw 2.4vh; }
   .name {
     margin: 0;
-    font-size: clamp(1.8rem, 2.9vw, 3.4rem);
+    font-size: clamp(1.6rem, 2.3vw, 2.9rem);
     font-weight: 700;
     line-height: 1.1;
   }
   .desc {
     margin: 1vh 0 0;
-    font-size: clamp(1.05rem, 1.45vw, 1.7rem);
+    font-size: clamp(1rem, 1.25vw, 1.5rem);
     line-height: 1.35;
     color: var(--text);
   }
   .meta {
     margin: 1.4vh 0 0;
-    font-size: clamp(0.95rem, 1.2vw, 1.4rem);
+    font-size: clamp(0.9rem, 1.05vw, 1.25rem);
     color: var(--muted);
   }
   .play {
@@ -131,6 +134,7 @@
   #tt { --accent: #f5a623; --art: linear-gradient(150deg, #5a3a0e, #c9781a 60%, #f5c04a); }
   #hx { --accent: #3fd0e8; --art: linear-gradient(150deg, #0c1d3f, #2c2b7a 55%, #1d8fb0); }
   #mt { --accent: #e8734a; --art: linear-gradient(180deg, #f2b56b 0%, #e0844f 55%, #9c4a2e 100%); }
+  #mm { --accent: #e3342f; --art: linear-gradient(160deg, #050505, #2a0a0c 55%, #6b1014); }
 
   @media (prefers-reduced-motion: reduce) {
     .tile, .play { transition: none; }
@@ -223,6 +227,38 @@
       <h2 class="name">Mesa Trails</h2>
       <p class="desc">Lay desert tiles, place scouts and score trails, mesas and oases.</p>
       <p class="meta">2–4 players · Xbox controllers · AI opponents</p>
+    </div>
+  </a>
+  <a class="tile" id="mm" href="https://wellmanaz.github.io/Metal-Mahjong/">
+    <span class="play"><span class="a">A</span><span class="play-label">Play</span></span>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 200 120">
+        <g transform="translate(20 4)">
+          <rect x="8" y="22" width="52" height="68" rx="7" fill="#b9ab8f"/>
+          <rect x="3" y="17" width="52" height="68" rx="7" fill="#f1ead8"/>
+          <rect x="9" y="23" width="40" height="56" rx="4" fill="#1b1b1f"/>
+          <circle cx="29" cy="51" r="14" fill="none" stroke="#c9ccd3" stroke-width="3"/>
+          <circle cx="29" cy="51" r="3" fill="#c9ccd3"/>
+        </g>
+        <g transform="translate(72 0)">
+          <rect x="8" y="22" width="52" height="68" rx="7" fill="#b9ab8f"/>
+          <rect x="3" y="17" width="52" height="68" rx="7" fill="#f1ead8"/>
+          <rect x="9" y="23" width="40" height="56" rx="4" fill="#5a0b10"/>
+          <polygon points="33,28 19,54 28,54 23,74 39,46 30,46" fill="#ffd23f"/>
+        </g>
+        <g transform="translate(124 4)">
+          <rect x="8" y="22" width="52" height="68" rx="7" fill="#b9ab8f"/>
+          <rect x="3" y="17" width="52" height="68" rx="7" fill="#f1ead8"/>
+          <rect x="9" y="23" width="40" height="56" rx="4" fill="#1b1b1f"/>
+          <circle cx="29" cy="51" r="14" fill="none" stroke="#c9ccd3" stroke-width="3"/>
+          <circle cx="29" cy="51" r="3" fill="#c9ccd3"/>
+        </g>
+      </svg>
+    </div>
+    <div class="body">
+      <h2 class="name">Metal Mahjong</h2>
+      <p class="desc">Mahjong solitaire with classic metal album covers and a soundtrack that follows your matches.</p>
+      <p class="meta">1 player · tap tiles with the pointer</p>
     </div>
   </a>
 </main>
