@@ -1,0 +1,8 @@
+{
+  "name": "hair-force-one",
+  "private": true,
+  "description": "Hair Force One: a maze-chase arcade game for the Xbox launcher",
+  "scripts": {
+    "test": "node --test"
+  }
+}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Hair Force One</title>
+<style>
+  html, body { height: 100%; margin: 0; background: #000; overflow: hidden; }
+  body { display: flex; align-items: center; justify-content: center; }
+  canvas {
+    display: block;
+    width: min(100vw, 177.78vh);
+    height: min(56.25vw, 100vh);
+    cursor: none;
+    touch-action: none;
+  }
+  noscript { color: #fff; font: 20px sans-serif; }
+</style>
+</head>
+<body>
+<canvas id="game" width="1920" height="1080" aria-label="Hair Force One"></canvas>
+<noscript>Hair Force One needs JavaScript.</noscript>
+<script src="js/mazes.js?v=1"></script>
+<script src="js/engine.js?v=1"></script>
+<script src="js/render.js?v=1"></script>
+<script src="js/input.js?v=1"></script>
+<script src="js/audio.js?v=1"></script>
+<script src="js/app.js?v=1"></script>
+</body>
+</html>

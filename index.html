@@ -28,7 +28,7 @@
     min-height: 100vh;
     overflow-x: hidden;
   }
-  header { margin-bottom: 3.5vh; }
+  header { margin-bottom: 2.5vh; }
   h1 {
     margin: 0;
     font-size: clamp(2rem, 4.2vw, 4.5rem);
@@ -41,11 +41,12 @@
     font-size: clamp(1rem, 1.5vw, 1.6rem);
   }
   .hint b { color: var(--text); font-weight: 600; }
+  /* Six games: three across, two rows, sized to fit a 1080p TV. */
   main {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1.6vw;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.2vh 1.6vw;
     align-content: start;
   }
   @media (max-width: 1200px) {
@@ -61,7 +62,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    min-height: 58vh;
+    min-height: 35vh;
     border-radius: 28px;
     overflow: hidden;
     text-decoration: none;
@@ -81,13 +82,14 @@
   .tile:focus .play { opacity: 1; transform: none; }
   .art {
     flex: 1 1 auto;
-    min-height: 22vh;
+    min-height: 10vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--art);
   }
-  .art svg { width: 78%; max-height: 30vh; height: auto; }
+  .art svg { width: 70%; max-height: 13vh; height: auto; }
+  @media (max-width: 1000px) { .art { min-height: 22vh; } .art svg { max-height: 20vh; } }
   .body { padding: 2.2vh 1.4vw 2.4vh; }
   .name {
     margin: 0;
@@ -139,6 +141,7 @@
   #mt { --accent: #e8734a; --art: linear-gradient(180deg, #f2b56b 0%, #e0844f 55%, #9c4a2e 100%); }
   #mm { --accent: #e3342f; --art: linear-gradient(160deg, #050505, #2a0a0c 55%, #6b1014); }
   #da { --accent: #6cc04a; --art: linear-gradient(170deg, #0b2416, #1d4f2a 55%, #3f7f2c); }
+  #hf { --accent: #ffcf3f; --art: linear-gradient(160deg, #0d1640, #1f2a6b 55%, #7a1a2a); }
 
   @media (prefers-reduced-motion: reduce) {
     .tile, .play { transition: none; }
@@ -301,6 +304,54 @@
     <div class="body">
       <h2 class="name">Damn Dirty Apes</h2>
       <p class="desc">Climb the jungle vines, jump the rolling coconuts and take back the banana crate from a gang of apes.</p>
+      <p class="meta">1 player · Xbox controller</p>
+    </div>
+  </a>
+  <a class="tile" id="hf" href="https://wellmanaz.github.io/x/hair/">
+    <span class="play"><span class="a">A</span><span class="play-label">Play</span></span>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 200 120">
+        <g fill="none" stroke-linecap="round">
+          <path d="M8 14 H84 M116 14 H192 M8 106 H192 M186 40 V86" stroke="#3a4fb8" stroke-width="5"/>
+          <path d="M8 14 H84 M116 14 H192 M8 106 H192 M186 40 V86" stroke="#e8393a" stroke-width="1.6"/>
+        </g>
+        <g fill="#ffd23f" stroke="#9a6a08" stroke-width="1.4">
+          <circle cx="112" cy="70" r="4"/>
+          <circle cx="129" cy="70" r="4"/>
+          <circle cx="146" cy="70" r="4"/>
+          <circle cx="163" cy="70" r="4"/>
+        </g>
+        <g transform="translate(160 38) rotate(-10)">
+          <rect x="-11" y="-14" width="22" height="28" rx="2.5" fill="#f4f1e6" stroke="#20243a" stroke-width="1.5"/>
+          <circle cx="-4.5" cy="-6" r="2.3" fill="#20243a"/>
+          <circle cx="4.5" cy="-6" r="2.3" fill="#20243a"/>
+          <path d="M-6 1 H6 M-6 5 H3" stroke="#8d93a8" stroke-width="1.5"/>
+          <circle cx="5.5" cy="10" r="4" fill="#d8342c"/>
+        </g>
+        <g transform="translate(62 66)">
+          <path d="M-15 19 L0 28 L15 19 L13 26 L0 33 L-13 26 Z" fill="#fff"/>
+          <path d="M-4.5 27 L4.5 27 L3 44 L0 48 L-3 44 Z" fill="#d8342c"/>
+          <ellipse cx="0" cy="2" rx="22" ry="24" fill="#f39a45"/>
+          <ellipse cx="-21" cy="4" rx="4" ry="6" fill="#e0853a"/>
+          <ellipse cx="-8" cy="0" rx="6.5" ry="4.5" fill="#ffe2b6"/>
+          <ellipse cx="8" cy="0" rx="6.5" ry="4.5" fill="#ffe2b6"/>
+          <path d="M-12 0 q4 -2.4 8 0 M4 0 q4 -2.4 8 0" fill="none" stroke="#3a2210" stroke-width="2" stroke-linecap="round"/>
+          <path d="M-14 -7 q6 -3 11 0 M3 -7 q6 -3 11 0" fill="none" stroke="#f2cf62" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M0 2 q3 5 0 8" fill="none" stroke="#d07a30" stroke-width="1.6" stroke-linecap="round"/>
+          <ellipse cx="0" cy="15" rx="4.2" ry="3.2" fill="#a83a2a"/>
+          <g fill="none" stroke="#ffd860" stroke-width="3.2" stroke-linecap="round">
+            <path d="M-20 -14 q-14 -4 -30 2"/>
+            <path d="M-16 -20 q-16 -10 -34 -6"/>
+            <path d="M-10 -24 q-14 -14 -30 -14"/>
+          </g>
+          <path d="M-23 -6 C -30 -30, -4 -38, 16 -30 C 26 -26, 34 -34, 40 -40 C 38 -24, 30 -14, 18 -14 C 6 -18, -10 -18, -23 -6 Z" fill="#ffd860" stroke="#c99a1a" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M-14 -16 C -6 -24, 8 -26, 22 -22" fill="none" stroke="#fff0a8" stroke-width="2" stroke-linecap="round"/>
+        </g>
+      </svg>
+    </div>
+    <div class="body">
+      <h2 class="name">Hair Force One</h2>
+      <p class="desc">Grab the gold, build walls and dodge the subpoenas. A cheeseburger turns the tables.</p>
       <p class="meta">1 player · Xbox controller</p>
     </div>
   </a>
