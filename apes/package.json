@@ -1,0 +1,8 @@
+{
+  "name": "damn-dirty-apes",
+  "private": true,
+  "description": "Damn Dirty Apes: a jungle climbing arcade game for the Xbox launcher",
+  "scripts": {
+    "test": "node --test"
+  }
+}

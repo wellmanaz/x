@@ -44,9 +44,12 @@
   main {
     flex: 1;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2vw;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.6vw;
     align-content: start;
+  }
+  @media (max-width: 1200px) {
+    main { grid-template-columns: repeat(3, 1fr); gap: 3vh 2.4vw; }
   }
   @media (max-width: 1000px) {
     main { grid-template-columns: repeat(2, 1fr); gap: 3vh 3vw; }
@@ -88,13 +91,13 @@
   .body { padding: 2.2vh 1.4vw 2.4vh; }
   .name {
     margin: 0;
-    font-size: clamp(1.6rem, 2.3vw, 2.9rem);
+    font-size: clamp(1.5rem, 1.95vw, 2.6rem);
     font-weight: 700;
     line-height: 1.1;
   }
   .desc {
     margin: 1vh 0 0;
-    font-size: clamp(1rem, 1.25vw, 1.5rem);
+    font-size: clamp(1rem, 1.1vw, 1.4rem);
     line-height: 1.35;
     color: var(--text);
   }
@@ -135,6 +138,7 @@
   #hx { --accent: #3fd0e8; --art: linear-gradient(150deg, #0c1d3f, #2c2b7a 55%, #1d8fb0); }
   #mt { --accent: #e8734a; --art: linear-gradient(180deg, #f2b56b 0%, #e0844f 55%, #9c4a2e 100%); }
   #mm { --accent: #e3342f; --art: linear-gradient(160deg, #050505, #2a0a0c 55%, #6b1014); }
+  #da { --accent: #6cc04a; --art: linear-gradient(170deg, #0b2416, #1d4f2a 55%, #3f7f2c); }
 
   @media (prefers-reduced-motion: reduce) {
     .tile, .play { transition: none; }
@@ -259,6 +263,45 @@
       <h2 class="name">Metal Mahjong</h2>
       <p class="desc">Mahjong solitaire with classic metal album covers and a soundtrack that follows your matches.</p>
       <p class="meta">1 player · tap tiles with the pointer</p>
+    </div>
+  </a>
+  <a class="tile" id="da" href="https://wellmanaz.github.io/x/apes/">
+    <span class="play"><span class="a">A</span><span class="play-label">Play</span></span>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 200 120">
+        <circle cx="30" cy="22" r="9" fill="#f3efc6" opacity="0.85"/>
+        <g fill="none" stroke-linecap="round">
+          <path d="M6 102 L194 108 M14 72 L186 64 M58 38 L128 38 M140 40 L182 40" stroke="#3b6620" stroke-width="7"/>
+          <path d="M6 100 L194 106 M14 70 L186 62 M58 36 L128 36 M140 38 L182 38" stroke="#a7d96b" stroke-width="5"/>
+          <path d="M150 67 q 5 6 0 11 q -5 6 0 11 q 5 6 0 12" stroke="#3fa34d" stroke-width="3"/>
+          <path d="M72 40 q 5 6 0 8 q -5 5 0 8 q 5 5 0 8" stroke="#3fa34d" stroke-width="3"/>
+          <path d="M87 21 q 5 -6 10 0 M93 21 q 4 -5 9 0" stroke="#ffd23f" stroke-width="3"/>
+        </g>
+        <ellipse cx="146" cy="80" rx="3.5" ry="2" fill="#6cc04a"/>
+        <ellipse cx="76" cy="52" rx="3.5" ry="2" fill="#6cc04a"/>
+        <rect x="84" y="21" width="20" height="12" rx="1.5" fill="#a06a2e" stroke="#5b3a14" stroke-width="1.5"/>
+        <g fill="#6b4423" stroke="#3d2412" stroke-width="1.2">
+          <circle cx="112" cy="94" r="6"/>
+          <circle cx="110" cy="57" r="6"/>
+        </g>
+        <rect x="27" y="92" width="6" height="6" fill="#6b5434"/>
+        <rect x="26" y="85" width="8" height="8" rx="1.5" fill="#c9b27c"/>
+        <circle cx="30" cy="81.5" r="3.5" fill="#f2c9a0"/>
+        <rect x="26.5" y="73.5" width="7" height="5" rx="1.5" fill="#b07a3e"/>
+        <ellipse cx="30" cy="78.5" rx="7" ry="1.8" fill="#8a5a2b"/>
+        <ellipse cx="161" cy="27" rx="12" ry="10" fill="#5a3a22"/>
+        <circle cx="161" cy="14" r="8" fill="#5a3a22"/>
+        <ellipse cx="161" cy="16.5" rx="5.5" ry="4.5" fill="#c99a6b"/>
+        <circle cx="158.5" cy="13" r="1.2" fill="#1a0f08"/>
+        <circle cx="163.5" cy="13" r="1.2" fill="#1a0f08"/>
+        <rect x="153" y="7" width="16" height="3" rx="1.5" fill="#d8342c"/>
+        <path d="M168 8 l6 -3 l-1 6 z" fill="#d8342c"/>
+      </svg>
+    </div>
+    <div class="body">
+      <h2 class="name">Damn Dirty Apes</h2>
+      <p class="desc">Climb the jungle vines, jump the rolling coconuts and take back the banana crate from a gang of apes.</p>
+      <p class="meta">1 player · Xbox controller</p>
     </div>
   </a>
 </main>
